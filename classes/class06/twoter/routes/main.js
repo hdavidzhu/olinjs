@@ -33,11 +33,7 @@ app.get('/', function(req, res, next) {
 
 		// Check to see if user can see the page.
 		if (req.session.authorName == null) {
-			res.render('main', {
-				isAuthenticated: req.isAuthenticated(),
-				user: req.user,
-				authorLoggedIn: false
-			});
+			res.redirect("/login");
 		} else {
 		  res.render('main', {
 		  	isAuthenticated: req.isAuthenticated(),
