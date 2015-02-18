@@ -2,6 +2,20 @@
 var Author = require('../models/author');
 var Twote = require('../models/twote');
 
+app.get('/auth/facebook', 
+	passport.authenticate('facebook'), 
+	function (req, res){
+});
+app.get('/auth/facebook/callback',
+	passport.authenticate('facebook', { failureRedirect: '/' }),
+	function(req, res) {
+		console.log(req.user);
+		req.session.authorName = req.user.displayName;
+		req.session.authorId = req.user.id;
+		req.session.save();
+		res.redirect('/');
+});
+
 app.get('/login', function (req, res, next) {
 	if (req.session.authorName != null) {
 		res.redirect('/');
@@ -9,11 +23,6 @@ app.get('/login', function (req, res, next) {
   	res.render('login');
 	}
 });
-
-// app.post('/login', passport.authenticate('local', {
-// 	failureRedirect: '/login',
-// 	successRedirect: '/'
-// }));
 
 app.post('/login', function (req, res){
 	var name = req.body.name;
@@ -76,8 +85,13 @@ app.post('/login/register', function (req, res){
 });
 
 app.get('/logout', function (req, res){
+
+	// Log out of Facebook.
+	req.logOut();
+
 	req.session.authorName = null;
 	req.session.authorId = null;
+	req.user = null;
 	req.session.save();
 	res.send('/login');
 });

@@ -30,6 +30,7 @@
     "node-sass": "^2.0.1",
     "node-sass-middleware": "^0.4.0",
     "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
     "sass-middleware": "^0.0.3",
     "serve-favicon": "^2.2.0",
