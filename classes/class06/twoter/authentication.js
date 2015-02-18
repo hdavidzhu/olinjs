@@ -1,4 +1,3 @@
-var config = require('./oauth.js');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 // Serialize and deserialize.
@@ -11,9 +10,9 @@ done(null, obj);
 
 // Config
 passport.use(new FacebookStrategy({
- clientID: config.facebook.clientID,
- clientSecret: config.facebook.clientSecret,
- callbackURL: config.facebook.callbackURL
+ clientID: process.env.TWOTER_APP_ID,
+ clientSecret: process.env.TWOTER_APP_SECRET,
+ callbackURL: "http://twoter2.herokuapp.com/auth/facebook/callback"
 },
 function (accessToken, refreshToken, profile, done) {
  process.nextTick(function () {
