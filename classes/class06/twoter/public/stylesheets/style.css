@@ -127,3 +127,12 @@ textarea {
 .deleteOn {
 	display: block;
 }
+
+.fb-login-button {
+	height: 100px;
+}
+
+#facebookSignIn {
+	margin-top: 20px;
+	
+}
